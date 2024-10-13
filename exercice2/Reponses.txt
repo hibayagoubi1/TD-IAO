@@ -1,0 +1,7 @@
+1-deux principes de SOLID ne sont pas respectés :
+
+Single Responsibility Principle (SRP) : La classe Compte gère à la fois la logique des opérations et les spécificités liées aux différents types de comptes (Courant et Epargne). Cela crée une responsabilité multiple dans une seule classe.
+
+Open/Closed Principle (OCP) : La classe Compte nécessite des modifications chaque fois qu'un nouveau type de compte est ajouté. Cela va à l'encontre du principe selon lequel les classes devraient être ouvertes à l'extension, mais fermées à la modification. Une solution consisterait à utiliser l'héritage pour permettre d'ajouter de nouveaux types de comptes sans modifier la classe existante.
+
+
