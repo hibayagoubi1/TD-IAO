@@ -1,0 +1,6 @@
+1- Le code ne respecte pas le principe de substitution de Liskov (LSP) du SOLID.
+ En effet, hériter d'ArrayList n'est pas approprié ici, car MatriceYoung n'est pas
+ une simple liste générique, mais une structure spécifique avec des opérations comme
+ l'insertion et l'extraction du minimum. L'héritage direct d'ArrayList peut causer
+ des problèmes, car cela impose des comportements qui ne sont pas pertinents pour
+ un tableau de Young.

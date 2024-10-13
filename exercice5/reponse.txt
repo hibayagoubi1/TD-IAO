@@ -1,0 +1,71 @@
+1-La première solution : Programmer pour une interface et non pour une implémentation
+2- public interface IPersonne {
+
+       String getNom();
+       void setNom(String nom);
+       String getPrenom();
+       void setPrenom(String prenom);
+       LocalDate getDateNaiss();
+       void setDateNaiss(LocalDate dateNaiss);
+       String getEmail();
+       void setEmail(String email);
+       String getTelMobile();
+       void setTelMobile(String telMobile);
+       int calculerAge();
+       void envoyerEmail(String msg, List<String> dest);
+       void envoyerSMS(String msg, int tel);
+   }
+--public class Calendrier {
+  publicvoidadd(IPersonne personne) { /* TODO */
+  }
+  }
+--Je pense que l'interface IPersonne n'est pas adaptée à notre situation actuelle.
+Elle doit être améliorée pour ne contenir que les méthodes nécessaires au calendrier,
+afin de gérer les anniversaires.
+
+Au lieu d'inclure toutes les méthodes de la classe Personne, nous devrions nous concentrer
+sur celles qui sont pertinentes, comme obtenir le nom, la date de naissance,
+et éventuellement calculer l'âge. Ainsi, l'interface pourrait ressembler à ceci :
+
+----public interface IPersonne {
+
+    String getNom();
+    LocalDate getDateNaissance();
+    int calculerAge();
+}
+3-Les méthodes communes entre les interfaces IAmiFacebook et IPersonne sont :
+    getDateNaissance() et calculerAge()
+--Pour réduire le couplage entre Calendrier, IPersonne, et IAmiFacebook, nous pouvons créer
+une interface commune qui contiendrait les méthodes partagées,
+et faire en sorte que IPersonne et IAmiFacebook étendent cette nouvelle interface
+
+public interface IAmi {
+      LocalDate getDateNaissance();
+      int calculerAge();
+  }
+
+public interface IPersonne extends IAmi {
+    String getNom();
+}
+
+public interface IAmiFacebook extends IAmi {
+    String getPseudo();
+}
+public class Calendrier {
+    public void add(IUtilisateur utilisateur) {
+        LocalDate dateNaissance = utilisateur.getDateNaissance();
+        int age = utilisateur.calculerAge();
+
+        // On peut traiter les utilisateurs différemment selon leur type
+        if (utilisateur instanceof IPersonne) {
+            String nom = ((IPersonne) utilisateur).getNom();
+            // Logique pour traiter une Personne
+        } else if (utilisateur instanceof IAmiFacebook) {
+            String pseudo = ((IAmiFacebook) utilisateur).getPseudo();
+            // Logique pour traiter un AmiFacebook
+        }
+    }
+}
+
+
+4-Le principe de solid non respecté : Ségrégation d'interface
