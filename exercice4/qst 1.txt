@@ -1,0 +1,3 @@
+1-Le principe SRP est le principe SOLID non respecté, 
+car les classes CompteUniversitaireEnseignent et CompteUniversitaireEtudiant ont la responsabilité 
+de gérer à la fois les informations des utilisateurs et la génération de leurs logins.
